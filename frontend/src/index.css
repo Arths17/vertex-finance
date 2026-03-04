@@ -1,0 +1,61 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  html {
+    @apply bg-vertex-bg text-white;
+  }
+  
+  body {
+    @apply bg-vertex-bg text-white font-mono;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-vertex-bg;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded hover:bg-gray-600;
+  }
+}
+
+@layer components {
+  .btn-vertex {
+    @apply px-4 py-2 rounded font-bold transition-opacity hover:opacity-80;
+  }
+  
+  .btn-vertex-primary {
+    @apply btn-vertex bg-vertex-green text-vertex-bg;
+  }
+  
+  .btn-vertex-secondary {
+    @apply btn-vertex border border-vertex-green text-vertex-green;
+  }
+  
+  .card-vertex {
+    @apply bg-vertex-card rounded-lg border border-gray-700 p-4;
+  }
+  
+  .text-gain {
+    @apply text-vertex-green;
+  }
+  
+  .text-loss {
+    @apply text-vertex-red;
+  }
+  
+  .input-vertex {
+    @apply bg-gray-800 border border-gray-700 px-3 py-2 rounded text-white placeholder-gray-500 focus:outline-none focus:border-vertex-green transition;
+  }
+}
+
+/* Smooth animations */
+* {
+  @apply transition-colors duration-200;
+}
