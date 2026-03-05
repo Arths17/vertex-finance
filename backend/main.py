@@ -16,6 +16,8 @@ from database import init_db
 
 # Import routes
 from routes.auth import router as auth_router
+from routes.strategies import router as strategies_router
+from routes.backtests import router as backtests_router
 
 # Import services
 from services.market_data import get_latest_price, get_historical_data
@@ -36,6 +38,8 @@ init_db()
 
 # Include routers
 app.include_router(auth_router)
+app.include_router(strategies_router)
+app.include_router(backtests_router)
 
 # CORS configuration
 app.add_middleware(
