@@ -12,12 +12,12 @@ load_dotenv()
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
 
 # Alpaca Markets API
-ALPACA_API_KEY = os.getenv("ALPACA_API_KEY_ID", "")
-ALPACA_SECRET_KEY = os.getenv("ALPACA_API_SECRET_KEY", "")
-ALPACA_BASE_URL = os.getenv("APCA_API_BASE_URL", "https://paper-api.alpaca.markets")
+ALPACA_API_KEY = os.getenv("ALPACA_API_KEY_ID", "CKMWITMUEMUTQNXDDMY5D532S5")
+ALPACA_SECRET_KEY = os.getenv("ALPACA_API_SECRET_KEY", "5sKLYEh124rQbidhrBhdE8mzBGnTfCfFtZnKR1MjK4jk")
+ALPACA_BASE_URL = os.getenv("APCA_API_BASE_URL", "https://broker-api.sandbox.alpaca.markets")
 
 # Gemini AI API (for AI-powered analysis)
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyCWF12m_HYjfp8g8OrkHVnNia4rs2Xpzmo")
 
 # Database
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///vertex.db")
