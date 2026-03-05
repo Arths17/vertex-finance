@@ -11,6 +11,12 @@ import os
 # Import configuration
 from config import ALPACA_API_KEY, ALPACA_SECRET_KEY, ENVIRONMENT
 
+# Import database
+from database import init_db
+
+# Import routes
+from routes.auth import router as auth_router
+
 # Import services
 from services.market_data import get_latest_price, get_historical_data
 from services.strategy_engine import analyze_market_prompt
@@ -25,6 +31,12 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# Initialize database
+init_db()
+
+# Include routers
+app.include_router(auth_router)
+
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
@@ -33,7 +45,8 @@ app.add_middleware(
         "http://localhost:5173", 
         "http://localhost:5174",
         "http://localhost:5175",
-        "http://localhost:5176"
+        "http://localhost:5176",
+        "https://Arths17.github.io"  # GitHub Pages
     ],
     allow_credentials=True,
     allow_methods=["*"],

@@ -25,5 +25,10 @@ DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///vertex.db")
 # Redis (for caching & websockets)
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 
+# Authentication & Security
+SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-change-in-production-12345")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
+REFRESH_TOKEN_EXPIRE_DAYS = int(os.getenv("REFRESH_TOKEN_EXPIRE_DAYS", "7"))
+
 # Logging
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
