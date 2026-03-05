@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vertex Finance</title>
+    <script type="text/javascript">
+      // Redirect to the index.html with the pathname as a hash
+      var segmentCount = 0;
+      var l = window.location;
+      l.replace(
+        l.protocol +
+          '//' +
+          l.hostname +
+          (l.port ? ':' + l.port : '') +
+          '/vertex-finance/#' +
+          l.pathname.slice(1) +
+          l.search
+      );
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
