@@ -65,10 +65,7 @@ function Navigation() {
           {/* CTA */}
           {isHome && !isAuthenticated && (
             <div className="hidden md:flex gap-4">
-              <Link to="/login" className="px-6 py-2 text-white hover:text-blue-400 transition-all">Sign In</Link>
-              <Link to="/signup" className="px-6 py-2 bg-gradient-to-r from-blue-500 to-cyan-400 text-black font-bold rounded-lg hover:shadow-lg hover:shadow-blue-500/50 transition-all">
-                Get Started
-              </Link>
+              <button disabled className="px-6 py-2 text-gray-500 cursor-not-allowed">Demo (Backend Required)</button>
             </div>
           )}
 
@@ -102,12 +99,6 @@ function Navigation() {
                 <Link to="/terminal" className="block text-gray-300 hover:text-blue-400">Terminal</Link>
                 <Link to="/explore" className="block text-gray-300 hover:text-blue-400">Explore</Link>
                 <button onClick={handleLogout} className="block text-gray-300 hover:text-blue-400">Logout</button>
-              </>
-            )}
-            {isHome && !isAuthenticated && (
-              <>
-                <Link to="/login" className="block text-gray-300 hover:text-blue-400">Sign In</Link>
-                <Link to="/signup" className="block px-4 py-2 bg-blue-500 text-white rounded-lg text-center">Get Started</Link>
               </>
             )}
           </div>
