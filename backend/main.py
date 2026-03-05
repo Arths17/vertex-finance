@@ -15,13 +15,10 @@ from backend.config import ALPACA_API_KEY, ALPACA_SECRET_KEY, ENVIRONMENT
 from backend.database import init_db
 
 # Import routes
-<<<<<<< HEAD
 from backend.routes.auth import router as auth_router
-=======
-from routes.auth import router as auth_router
-from routes.strategies import router as strategies_router
-from routes.backtests import router as backtests_router
->>>>>>> ace928356d32733a015251f818645d53269457be
+from backend.routes.auth import router as auth_router
+from backend.routes.strategies import router as strategies_router
+from backend.routes.backtests import router as backtests_router
 
 # Import services
 from backend.services.market_data import get_latest_price, get_historical_data
