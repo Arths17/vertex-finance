@@ -3,12 +3,135 @@
 
 const API_BASE_URL = 'http://localhost:8000/api';
 
+// Helper function to get auth headers
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('access_token');
+  return {
+    'Content-Type': 'application/json',
+    ...(token && { 'Authorization': `Bearer ${token}` })
+  };
+};
+
+const makeRequest = async (url, options = {}) => {
+  const response = await fetch(url, {
+    ...options,
+    headers: getAuthHeaders()
+  });
+  
+  if (response.status === 401) {
+    // Token expired, clear and redirect to login
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('user');
+    window.location.hash = '/#/login';
+  }
+  
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.detail || `API Error: ${response.status}`);
+  }
+  
+  return response.json();
+};
+
 export const api = {
-  // AI Chat endpoints
+  // ============ AUTH ============
+  login: async (email, password) => {
+    return makeRequest(`${API_BASE_URL}/auth/login`, {
+      method: 'POST',
+      body: JSON.stringify({ email, password })
+    });
+  },
+
+  register: async (email, username, password, full_name) => {
+    return makeRequest(`${API_BASE_URL}/auth/register`, {
+      method: 'POST',
+      body: JSON.stringify({ email, username, password, full_name })
+    });
+  },
+
+  getCurrentUser: async () => {
+    return makeRequest(`${API_BASE_URL}/auth/me`, {
+      method: 'GET'
+    });
+  },
+
+  // ============ STRATEGIES ============
+  createStrategy: async (strategyData) => {
+    return makeRequest(`${API_BASE_URL}/strategies`, {
+      method: 'POST',
+      body: JSON.stringify(strategyData)
+    });
+  },
+
+  getStrategies: async (skip = 0, limit = 10) => {
+    return makeRequest(`${API_BASE_URL}/strategies?skip=${skip}&limit=${limit}`, {
+      method: 'GET'
+    });
+  },
+
+  getPublicStrategies: async (skip = 0, limit = 10) => {
+    return makeRequest(`${API_BASE_URL}/strategies/public?skip=${skip}&limit=${limit}`, {
+      method: 'GET'
+    });
+  },
+
+  getStrategy: async (strategyId) => {
+    return makeRequest(`${API_BASE_URL}/strategies/${strategyId}`, {
+      method: 'GET'
+    });
+  },
+
+  updateStrategy: async (strategyId, strategyData) => {
+    return makeRequest(`${API_BASE_URL}/strategies/${strategyId}`, {
+      method: 'PUT',
+      body: JSON.stringify(strategyData)
+    });
+  },
+
+  deleteStrategy: async (strategyId) => {
+    return makeRequest(`${API_BASE_URL}/strategies/${strategyId}`, {
+      method: 'DELETE'
+    });
+  },
+
+  cloneStrategy: async (strategyId) => {
+    return makeRequest(`${API_BASE_URL}/strategies/${strategyId}/clone`, {
+      method: 'GET'
+    });
+  },
+
+  // ============ BACKTESTS ============
+  createBacktest: async (backtestData) => {
+    return makeRequest(`${API_BASE_URL}/backtests`, {
+      method: 'POST',
+      body: JSON.stringify(backtestData)
+    });
+  },
+
+  getBacktests: async (skip = 0, limit = 10) => {
+    return makeRequest(`${API_BASE_URL}/backtests?skip=${skip}&limit=${limit}`, {
+      method: 'GET'
+    });
+  },
+
+  getBacktest: async (backtestId) => {
+    return makeRequest(`${API_BASE_URL}/backtests/${backtestId}`, {
+      method: 'GET'
+    });
+  },
+
+  deleteBacktest: async (backtestId) => {
+    return makeRequest(`${API_BASE_URL}/backtests/${backtestId}`, {
+      method: 'DELETE'
+    });
+  },
+
+  // ============ AI CHAT (existing) ============
   chatWithAI: async (message, conversationHistory = []) => {
     const response = await fetch(`${API_BASE_URL}/ai/chat`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ 
         message, 
         conversation_history: conversationHistory 
@@ -21,23 +144,21 @@ export const api = {
   getAIInsights: async (symbols) => {
     const response = await fetch(`${API_BASE_URL}/ai/insights`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ symbols }),
     });
     return response.json();
   },
 
-  // Terminal endpoints
+  // ============ TERMINAL (existing) ============
   analyzeMarket: async (prompt, symbol) => {
     const response = await fetch(`${API_BASE_URL}/terminal/analyze`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ prompt, symbol }),
     });
     return response.json();
   },
-
-  // Watchlist endpoints
   getWatchlist: async () => {
     const response = await fetch(`${API_BASE_URL}/watchlist`);
     return response.json();
