@@ -1,6 +1,38 @@
-# Vertex: AI-Powered Trading Terminal
+# ⚡ VERTEX AI - Professional Trading Terminal
 
-A professional-grade trading platform that bridges the gap between retail trading and institutional-grade quantitative analysis.
+A professional-grade trading platform that bridges the gap between retail trading and institutional-grade quantitative analysis. Built with React, FastAPI, and powered by Gemini AI.
+
+---
+
+## 🚀 Quick Start (5 minutes)
+
+**👉 [Complete Setup Guide → Read SETUP_GUIDE.md](./SETUP_GUIDE.md)**
+
+### Fastest Setup:
+```bash
+# Terminal 1: Backend
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python main.py
+
+# Terminal 2: Frontend (new terminal window)
+cd frontend
+npm install
+npm run dev
+```
+
+Then open: **http://localhost:5173/**
+
+---
+
+## 📖 Full Documentation
+
+- **[SETUP_GUIDE.md](./SETUP_GUIDE.md)** - Complete step-by-step setup (100% guaranteed to work)
+- **[QUICK_START.sh](./QUICK_START.sh)** - Automated setup script
+
+---
 
 ## Project Structure
 
