@@ -3,13 +3,19 @@ Gemini AI Service
 Handles AI-powered conversational market analysis using Google's Gemini
 """
 
+import dotenv
 from google import genai
 from google.genai import types
 import os
 from typing import Dict, List
 import json
+from dotenv import load_dotenv
+from pathlib import Path
 
 # Get API key
+BASE_DIR = Path(__file__).resolve().parent.parent  # go up to backend/
+dotenv_path = BASE_DIR / ".env"
+load_dotenv(dotenv_path=dotenv_path)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
 
 # Configure Gemini client

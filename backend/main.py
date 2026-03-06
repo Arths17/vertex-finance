@@ -9,13 +9,12 @@ from pydantic import BaseModel
 import os
 
 # Import configuration
-from backend.config import ALPACA_API_KEY, ALPACA_SECRET_KEY, ENVIRONMENT
+from backend.config import ALPACA_API_KEY, ALPACA_SECRET_KEY, ENVIRONMENT, GEMINI_API_KEY
 
 # Import database
 from backend.database import init_db
 
 # Import routes
-from backend.routes.auth import router as auth_router
 from backend.routes.auth import router as auth_router
 from backend.routes.strategies import router as strategies_router
 from backend.routes.backtests import router as backtests_router
@@ -128,7 +127,6 @@ async def ai_chat(chat: ChatMessage):
             user_message=chat.message,
             conversation_history=chat.conversation_history,
             symbol=chat.symbol,
-            market_data=market_data
         )
         
         return {
