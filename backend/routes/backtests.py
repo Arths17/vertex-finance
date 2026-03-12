@@ -4,10 +4,10 @@ Backtesting endpoints
 
 from fastapi import APIRouter, Depends, HTTPException, status, Query, BackgroundTasks
 from sqlalchemy.orm import Session
-from database import get_db
-from models.database_models import Backtest, Strategy, User
-from schemas import BacktestCreate, BacktestResponse, BacktestDetailResponse
-from auth import get_current_user, TokenData
+from backend.database import get_db
+from backend.models.database_models import Backtest, Strategy, User
+from backend.schemas import BacktestCreate, BacktestResponse, BacktestDetailResponse
+from backend.routes.auth import get_current_user, TokenData
 from datetime import datetime
 import json
 

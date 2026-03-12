@@ -9,23 +9,23 @@ from pydantic import BaseModel
 import os
 
 # Import configuration
-from config import ALPACA_API_KEY, ALPACA_SECRET_KEY, ENVIRONMENT
+from backend.config import ALPACA_API_KEY, ALPACA_SECRET_KEY, ENVIRONMENT, GEMINI_API_KEY
 
 # Import database
-from database import init_db
+from backend.database import init_db
 
 # Import routes
-from routes.auth import router as auth_router
-from routes.strategies import router as strategies_router
-from routes.backtests import router as backtests_router
+from backend.routes.auth import router as auth_router
+from backend.routes.strategies import router as strategies_router
+from backend.routes.backtests import router as backtests_router
 
 # Import services
-from services.market_data import get_latest_price, get_historical_data
-from services.strategy_engine import analyze_market_prompt
-from services.metrics import calculate_strategy_metrics
-from services.paper_trading import execute_paper_trade, get_portfolio
-from services.alerts import create_price_alert
-from services.gemini_ai import chat_with_ai, get_market_insights
+from backend.services.market_data import get_latest_price, get_historical_data
+from backend.services.strategy_engine import analyze_market_prompt
+from backend.services.metrics import calculate_strategy_metrics
+from backend.services.paper_trading import execute_paper_trade, get_portfolio
+from backend.services.alerts import create_price_alert
+from backend.services.gemini_ai import chat_with_ai, get_market_insights
 
 app = FastAPI(
     title="Vertex Trading Terminal API",
@@ -127,7 +127,6 @@ async def ai_chat(chat: ChatMessage):
             user_message=chat.message,
             conversation_history=chat.conversation_history,
             symbol=chat.symbol,
-            market_data=market_data
         )
         
         return {

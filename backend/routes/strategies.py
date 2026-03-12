@@ -4,10 +4,10 @@ Strategy management endpoints
 
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
-from database import get_db
-from models.database_models import Strategy, User
-from schemas import StrategyCreate, StrategyUpdate, StrategyResponse, StrategyDetailResponse
-from auth import get_current_user, TokenData
+from backend.database import get_db
+from backend.models.database_models import Strategy, User
+from backend.schemas import StrategyCreate, StrategyUpdate, StrategyResponse, StrategyDetailResponse
+from backend.routes.auth import get_current_user, TokenData
 
 router = APIRouter(prefix="/api/strategies", tags=["strategies"])
 

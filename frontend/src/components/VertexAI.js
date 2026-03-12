@@ -29,7 +29,7 @@ export function VertexAI({ symbol = null }) {
     setIsLoading(true);
 
     try {
-      const response = await api.chatWithAI(input, symbol);
+      const response = await api.chatWithAI(input, messages, symbol);
       const assistantMessage = {
         role: 'assistant',
         content: response.response || 'I apologize, but I couldn\'t generate a response.',
@@ -39,7 +39,7 @@ export function VertexAI({ symbol = null }) {
       console.error('AI Chat Error:', error);
       const errorMessage = {
         role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again.',
+        content: error.message || "Sorry, please try again later",
       };
       setMessages(prev => [...prev, errorMessage]);
     } finally {

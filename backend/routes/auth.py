@@ -4,13 +4,13 @@ Authentication endpoints for user registration, login, and token management
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from database import get_db
-from models.database_models import User
-from auth import (
+from backend.database import get_db
+from backend.models.database_models import User
+from backend.auth import (
     hash_password, verify_password, create_access_token,
     create_refresh_token, verify_token, get_current_user, TokenData
 )
-from schemas import UserRegister, UserLogin, UserResponse, TokenResponse
+from backend.schemas import UserRegister, UserLogin, UserResponse, TokenResponse
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 

@@ -128,17 +128,18 @@ export const api = {
   },
 
   // ============ AI CHAT (existing) ============
-  chatWithAI: async (message, conversationHistory = []) => {
+  chatWithAI: async (message, conversationHistory = [], symbol) => {
     const response = await fetch(`${API_BASE_URL}/ai/chat`, {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify({ 
         message, 
-        conversation_history: conversationHistory 
+        conversation_history: conversationHistory,
+        symbol
       }),
     });
     const data = await response.json();
-    return data.response;
+    return data;
   },
 
   getAIInsights: async (symbols) => {

@@ -5,7 +5,7 @@ Handles real-time and historical price data from Alpaca Markets API
 
 import aiohttp
 from typing import Dict, List
-from config import ALPACA_API_KEY, ALPACA_SECRET_KEY, ALPACA_BASE_URL
+from backend.config import ALPACA_API_KEY, ALPACA_SECRET_KEY, ALPACA_BASE_URL
 
 async def get_latest_price(symbol: str) -> float:
     """

@@ -5,7 +5,7 @@ Simulates trades using Alpaca Paper Trading API
 
 from typing import Dict, List
 import aiohttp
-from config import ALPACA_API_KEY, ALPACA_SECRET_KEY, ALPACA_BASE_URL
+from backend.config import ALPACA_API_KEY, ALPACA_SECRET_KEY, ALPACA_BASE_URL
 from datetime import datetime
 
 async def execute_paper_trade(symbol: str, quantity: float, side: str) -> Dict:

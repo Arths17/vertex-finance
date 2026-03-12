@@ -7,7 +7,7 @@ from typing import Optional
 import jwt
 import bcrypt
 from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPBearer, HTTPAuthCredentials
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 import os
 from dotenv import load_dotenv
@@ -104,7 +104,7 @@ def verify_token(token: str) -> TokenData:
         )
 
 
-async def get_current_user(credentials: HTTPAuthCredentials = Depends(security)):
+async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
     """Dependency to get current user from token"""
     token = credentials.credentials
     return verify_token(token)
